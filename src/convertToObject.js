@@ -25,9 +25,9 @@ function convertToObject(sourceString) {
     return stylesObject;
   };
 
-  const result = nonEmptyDec.reduce(callback, {});
+  const parsedStyles = nonEmptyDec.reduce(callback, {});
 
-  return result;
+  return parsedStyles;
 }
 
 module.exports = convertToObject;
