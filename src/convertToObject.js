@@ -6,21 +6,26 @@
  * @return {object}
  */
 function convertToObject(sourceString) {
-  const array = sourceString.split(';');
+  const styleDec = sourceString.split(';');
 
-  const arrayNoEmpties = array.filter((element) => element.trim() !== '');
+  const nonEmptyDec = styleDec.filter((element) => element.trim() !== '');
 
-  const callback = (object, string) => {
-    const index = string.indexOf(':');
-    const key = string.slice(0, index).trim();
-    const value = string.slice(index + 1).trim();
+  const callback = (stylesObject, declaration) => {
+    const index = declaration.indexOf(':');
 
-    object[key] = value;
+    if (index === -1) {
+      return stylesObject;
+    }
 
-    return object;
+    const key = declaration.slice(0, index).trim();
+    const value = declaration.slice(index + 1).trim();
+
+    stylesObject[key] = value;
+
+    return stylesObject;
   };
 
-  const result = arrayNoEmpties.reduce(callback, {});
+  const result = nonEmptyDec.reduce(callback, {});
 
   return result;
 }
